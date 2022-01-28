@@ -468,6 +468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AR Default Face
       objectReference: {fileID: 0}
+    - target: {fileID: 3937101895936387539, guid: 852d9cba72612ee43b5a45ab105a0d43,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ef55e63ef96c7a944850f2d8c3534036, type: 2}
     - target: {fileID: 5557665006217212493, guid: 852d9cba72612ee43b5a45ab105a0d43,
         type: 3}
       propertyPath: m_RootOrder
