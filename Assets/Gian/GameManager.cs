@@ -8,9 +8,17 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { set; get; }
     Coroutine exerciseCoroutine;
 
-    public GameObject exercise;
+    public GameObject[] exercise;
     public Transform spawn;
     public float exerciseTime = 35f;
+    public int currentExercise = -1;
+
+    // Mat Change
+    protected Renderer render;
+    public Material originalMat;
+    public Material[] activeMat;
+
+    public GameObject faceMask;
     #endregion
 
     #region singilton
@@ -39,7 +47,20 @@ public class GameManager : MonoBehaviour
     {
         while(true)
         {
-            Instantiate(exercise, spawn.transform.position, Quaternion.identity);
+            if(currentExercise < 3) // exercise.length -1
+            {
+                currentExercise++;
+            }
+           
+            foreach (GameObject go in exercise)
+            {
+                go.SetActive(false);
+            }
+
+            //Instantiate(exercise[], spawn.transform.position, Quaternion.identity);
+            exercise[currentExercise].SetActive(true);
+            ChangeMat();
+
             yield return new WaitForSeconds(exerciseTime);
         }
     }
@@ -48,5 +69,18 @@ public class GameManager : MonoBehaviour
     {
         exerciseCoroutine = StartCoroutine(ExerciseChanger());
         //StopCoroutine(exerciseCoroutine); to stop specific coroutine
+        //ChangeMatBack();
+    }
+
+    public virtual void ChangeMat()
+    {
+        //originalMat = render.material;
+        render = faceMask.GetComponent<Renderer>(); //face mesh
+        render.material = activeMat[currentExercise];
+    }
+
+    public virtual void ChangeMatBack()
+    {
+        render.material = originalMat;
     }
 }
