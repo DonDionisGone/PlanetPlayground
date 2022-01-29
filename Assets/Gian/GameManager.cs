@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     // Mat Change
     protected Renderer render;
     public Material originalMat;
-    public Material[] activeMat;
+    public Texture[] activeTexture;
 
     public GameObject faceMask;
     #endregion
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         //originalMat = render.material;
         render = faceMask.GetComponent<Renderer>(); //face mesh
-        render.material = activeMat[currentExercise];
+        render.material.mainTexture = activeTexture[currentExercise];
     }
 
     public virtual void ChangeMatBack()
